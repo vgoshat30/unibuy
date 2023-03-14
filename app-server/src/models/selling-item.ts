@@ -5,6 +5,7 @@ export interface SellingItem {
     description: string;
     creationDate: Date;
     quantity:number;
+    colors: string[];
     image: string;
     tags: Tags[];
     sellersShop: Object;//todo: add seller object

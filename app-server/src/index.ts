@@ -1,3 +1,3 @@
 import {Unibuy} from "./unibuy/unibuy";
 
-new Unibuy().init();
+new Unibuy().init().then();
