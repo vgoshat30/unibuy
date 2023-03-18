@@ -2,7 +2,7 @@ import {Application, Request, Response} from "express";
 import {SellingItem} from "../models/selling-item";
 import {Tags} from "../models/tags";
 import {Filter} from "./models/filter";
-import {MongoSearcher} from "./out/mongo-searcher";
+// import {MongoSearcher} from "./out/mongo-searcher";
 
 export class SearchApi {
 
@@ -27,13 +27,25 @@ export class SearchApi {
         creationDate: new Date(),
     }];
 
-    constructor(app: Application, private mongoSearcher:MongoSearcher) {
-        app.post('/search',this.search.bind(this))
+    // constructor(app: Application, private mongoSearcher:MongoSearcher) {
+    //     app.post('/search',this.search.bind(this))
+    // }
+    constructor(app: Application) {
+        app.post('/search',this.search.bind(this));
+        app.get('/',this.stam.bind(this))
     }
 
     private search(req: Request, res: Response):void {
         const filter:Filter = req.body;
-        this.mongoSearcher.insert(this.sellingItems);
-        res.send(JSON.stringify(this.mongoSearcher.search(filter)));
+        console.log('post');
+        res.header('Access-Control-Allow-Headers')
+        //this.mongoSearcher.insert(this.sellingItems);
+        // res.send(JSON.stringify(this.mongoSearcher.search(filter)));
+        res.send(this.sellingItems);
+    }
+
+    private stam(req: Request, res: Response):void{
+        console.log('hofit');
+        res.send("hi");
     }
 }

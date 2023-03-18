@@ -8,9 +8,10 @@ export class Unibuy {
 
     async init() {
         const app = this.createExpressServer();
-        const mongo = new MongoConnector();
-        await mongo.connect();
-        new SearchApi(app, new MongoSearcher(mongo));
+     //   const mongo = new MongoConnector();
+     //   await mongo.connect();
+     //   new SearchApi(app, new MongoSearcher(mongo));
+        new SearchApi(app);
         app.listen(8080, () => {
             console.log(`⚡️[server]: Server is running at http://localhost:8080`);
         });
