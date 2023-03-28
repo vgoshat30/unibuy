@@ -4,26 +4,25 @@ import {MongoInterface} from "../../mongo-connector/out/mongo-interface";
 import {SellingItem} from "../../models/selling-item";
 
 export class MongoSearcher extends MongoInterface{
-    private sellingItemModel: any;
 
     constructor(mongoConnector:MongoConnector) {
-        super();
-        this.sellingItemModel = mongoConnector.sellingItemModel;
+        super(mongoConnector);
     }
 
-    search(filter:Filter): SellingItem[]{
-        const result = this.sellingItemModel
-            .find({
-                name: filter.wordSearch,
-                description: filter.wordSearch,
-                tags: {$some: filter.tags},
-                colors: {$some: filter.colors}
-            })
+    async search(filter:Filter): Promise<SellingItem[]> {
+        const findObject = {
+            $and: [
+                ...(filter.wordSearch ? [{
+                    $or: [{name: {$regex: filter.wordSearch, $options: 'i'}},
+                        {description: {$regex: filter.wordSearch, $options: 'i'}}]
+                }] : []),
+                ...(filter.tags ? [{tags: {$in: filter.tags}}] : []),
+                ...(filter.colors ? [{colors: {$in: filter.colors}}] : [])
+            ]
+        }
+        const result = await this.sellingItemModel
+            .find({...findObject})
             .limit(filter.limit);
         return result.map(this.mapResponseToObject<SellingItem[]>);
-    }
-    insert(selling) {
-        const result = this.sellingItemModel
-            .insert(selling);
     }
 }

@@ -39,6 +39,6 @@ export class MongoConnector {
     }
 
     get sellingItemModel(): any | Error {
-       return this.sellingItem ?? new Error('selling item has not been initialized yet');
+       return this.sellingItem ?? new Error('Selling item has not been initialized yet');
     }
 }
