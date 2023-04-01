@@ -3,15 +3,17 @@ import express from 'express'
 import {SearchApi} from "../search/search-api";
 import {MongoConnector} from "../mongo-connector/mongo-connector";
 import {MongoSearcher} from "../search/out/mongo-searcher";
+import {ShopApi} from "../shop/shop-api";
+import {MongoInterface} from "../mongo-connector/out/mongo-interface";
 
 export class Unibuy {
 
     async init() {
         const app = this.createExpressServer();
-     //   const mongo = new MongoConnector();
-     //   await mongo.connect();
-     //   new SearchApi(app, new MongoSearcher(mongo));
-        new SearchApi(app);
+        const mongo = new MongoConnector();
+        await mongo.connect();
+        new SearchApi(app, new MongoSearcher(mongo));
+        new ShopApi(app, new MongoInterface(mongo));
         app.listen(8080, () => {
             console.log(`⚡️[server]: Server is running at http://localhost:8080`);
         });

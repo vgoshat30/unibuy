@@ -1,0 +1,20 @@
+[{
+"name": "awesome t-shirt",
+"colors": ["red"],
+"description": "very very awesome t-shirt",
+"tags": ["T_SHIRT","SUMMER"],
+"image": "src",
+"quantity": 10,
+"sellersShop": {},
+"creationDate": "04/23/22 04:34:22 +0200"
+},
+{
+"name": "not awesome jeans",
+  "colors": ["red"],
+"description": "very very not awesome jeans",
+  "tags": ["JEANS", "SHORT_PANTS", "SUMMER"],
+"image": "src",
+  "quantity": 5,
+"sellersShop": {},
+"creationDate": "04/23/22 04:34:22 +0200"
+}]
