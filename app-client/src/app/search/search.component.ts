@@ -1,46 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, ViewEncapsulation } from '@angular/core';
 import { product } from './product.model';
 import { HttpClient } from '@angular/common/http';
+import {Tags} from "../models/tags.model";
+import { Filter } from '../models/filter';
 
+@Pipe({name: 'enumToArray'})
+export class EnumToArrayPipe implements PipeTransform {
+  transform(value: any): [number, string][] {
+    return Object.keys(value).filter(t => isNaN(+t)).map(t => [value[t], t]);
+  }
+}
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SearchComponent implements OnInit {
 
   searchQuery: string = '';
   searchUrl: string = "http://localhost:8080/search"
 
-  sellingItems: product[] = [{
-    name: 'awesome t-shirt',
-    colors: ['red'],
-    description: 'very very awesome t-shirt',
-    image:'src',
-    quantity: 10,
-    sellersShop: {},
-    creationDate: new Date(),
-},
-{
-    name: 'not awesome jeans',
-    colors: ['red'],
-    description: 'very very not awesome jeans',
-    image:'src',
-    quantity: 5,
-    sellersShop: {},
-    creationDate: new Date(),
-}];
+colors: string[] = ["red","white", "blue", "green", "black", "yellow"];
 
+Tags = Tags;
+selectedOptionsTags:Tags[] = [];
+selectedColors:string[] = [];
 products: product[] = [];
 
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   search(){
-    this.http.post<product[]>(this.searchUrl, this.searchQuery).subscribe(
+    const searchFilter:Filter = {
+       tags:this.selectedOptionsTags,
+       wordSearch:this.searchQuery,
+       colors:this.selectedColors,
+       limit:10
+    };
+    console.log(searchFilter);
+    this.http.post<product[]>(this.searchUrl, searchFilter).subscribe(
       data => {
         console.log(data);
         this.products = data;
@@ -50,5 +52,6 @@ products: product[] = [];
       }
     );
   }
+
 
 }
