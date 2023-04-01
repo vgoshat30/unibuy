@@ -4,13 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {Tags} from "../models/tags.model";
 import { Filter } from '../models/filter';
 
-@Pipe({name: 'enumToArray'})
-export class EnumToArrayPipe implements PipeTransform {
-  transform(value: any): [number, string][] {
-    return Object.keys(value).filter(t => isNaN(+t)).map(t => [value[t], t]);
-  }
-}
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -25,6 +18,7 @@ export class SearchComponent implements OnInit {
 colors: string[] = ["red","white", "blue", "green", "black", "yellow"];
 
 Tags = Tags;
+values = Object.values;
 selectedOptionsTags:Tags[] = [];
 selectedColors:string[] = [];
 products: product[] = [];

@@ -16,8 +16,8 @@ export class MongoSearcher extends MongoInterface{
                     $or: [{name: {$regex: filter.wordSearch, $options: 'i'}},
                         {description: {$regex: filter.wordSearch, $options: 'i'}}]
                 }] : []),
-                ...(filter.tags ? [{tags: {$in: filter.tags}}] : []),
-                ...(filter.colors ? [{colors: {$in: filter.colors}}] : [])
+                ...(filter.tags?.length ? [{tags: {$in: filter.tags}}] : []),
+                ...(filter.colors?.length ? [{colors: {$in: filter.colors}}] : [])
             ]
         }
         const result = await this.sellingItemModel
