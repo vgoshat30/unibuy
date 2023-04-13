@@ -5,7 +5,7 @@ export class MongoConnector {
     private sellingItem: any;
 
     async connect() {
-        const uri = "mongodb://localhost:27017/test";
+        const uri = "mongodb+srv://unibuy:rOH7GtrxIyOwFFWc@cluster0.nxaud2d.mongodb.net/?retryWrites=true&w=majority";
         if (this.database) {
             return;
         }
