@@ -42,3 +42,15 @@ export class MongoConnector {
        return this.sellingItem ?? new Error('Selling item has not been initialized yet');
     }
 }
+
+const User = Mongoose.model('users', new Mongoose.Schema({
+    email: String,
+    password: String,
+    name: String,
+    isSeller: Boolean,
+    isAdmin: Boolean,
+    createdAt: Date,
+    updatedAt: Date
+}));
+
+export const MongoModel = {User};
