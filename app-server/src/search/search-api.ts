@@ -1,6 +1,4 @@
 import {Application, Request, Response} from "express";
-import {SellingItem} from "../models/selling-item";
-import {Tags} from "../models/tags";
 import {Filter} from "./models/filter";
 import {MongoSearcher} from "./out/mongo-searcher";
 
