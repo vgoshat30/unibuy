@@ -1,15 +1,25 @@
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-  <span style="margin-top: 20px; margin-bottom: 50px">Log in</span>
-  <div style="margin-bottom: 20px">
-    <div>Email</div>
-    <input style="border: none; border-bottom: 1px solid;" [(ngModel)]="email">
+  <div *ngIf="currPage == 'login'">
+    <div style="margin-top: 20px; margin-bottom: 50px">Log in</div>
+    <div style="margin-bottom: 20px">
+      <div>Email</div>
+      <input style="border: none; border-bottom: 1px solid;" [(ngModel)]="email">
+    </div>
+    <div style="margin-bottom: 20px">
+      <div>Password</div>
+      <input type="password" style="border: none; border-bottom: 1px solid;" [(ngModel)]="password">
+    </div>
+    <button style="margin-top: 20px; padding: 3px 50px; background: black; border-radius: 10px; cursor: pointer"><span style="color: white" (click)="login()">Log in</span></button>
+    <div style="margin: 50px 0px">
+      <span style="cursor: pointer" (click)="changePage('signup')">Or sign up here</span>
+    </div>
   </div>
-  <div style="margin-bottom: 20px">
-    <div>Password</div>
-    <input type="password" style="border: none; border-bottom: 1px solid;" [(ngModel)]="password">
+
+  <div *ngIf="currPage == 'signup'">
+    <app-sign-up></app-sign-up>
   </div>
-  <button style="margin-top: 20px; padding: 3px 50px; background: black; border-radius: 10px; cursor: pointer"><span style="color: white" (click)="login()">Log in</span></button>
-  <div style="margin: 50px 0px">
-    <span>Or sign up here</span>
+
+  <div *ngIf="currPage == 'home'">
+    <app-home [user]="user" (logout)="logout()"></app-home>
   </div>
 </div>

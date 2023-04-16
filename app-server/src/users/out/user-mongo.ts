@@ -6,4 +6,9 @@ async function createUser(basicUser: BasicUser) {
     return await newUser.save();
 }
 
-export const UsersMongo = {createUser};
+async function login(basicUser: BasicUser) {
+    const user = await MongoModel.User.findOne({email: basicUser.email, password: basicUser.password});
+    return user;
+}
+
+export const UsersMongo = {createUser, login};
