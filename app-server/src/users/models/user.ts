@@ -1,7 +1,7 @@
 export interface BasicUser {
     email:string;
-    name:string;
     password:string;
+    name?:string;
 }
 
 export interface User extends BasicUser {
