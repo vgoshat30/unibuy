@@ -20,6 +20,8 @@ export class LoginComponent {
       if (res) {
         this.user = res;
         this.currPage = 'home';
+        this.email = '';
+        this.password = '';
       } else {
         alert('User dosent exist!');
       }

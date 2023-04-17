@@ -1,6 +1,6 @@
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <div *ngIf="!showLoginPage">
-    <div style="margin-top: 20px; margin-bottom: 50px">Sign up</div>
+    <div style="margin-top: 20px; margin-bottom: 50px">Welcome to Unibuy, please Sign up</div>
     <div style="margin-bottom: 20px">
       <div>Email</div>
       <input style="border: none; border-bottom: 1px solid;" [(ngModel)]="email">
@@ -13,9 +13,9 @@
       <div>Password</div>
       <input type="password" style="border: none; border-bottom: 1px solid;" [(ngModel)]="password">
     </div>
-    <button style="margin-top: 20px; padding: 3px 50px; background: black; border-radius: 10px; cursor: pointer"><span style="color: white" (click)="signup()">Sign up</span></button>
+    <button><span (click)="signup()">Sign up</span></button>
     <div style="margin: 50px 0px">
-      <span style="cursor: pointer" (click)="changePage()">Or sign in here</span>
+      <span style="cursor: pointer; border: 1px solid grey; border-radius: 10px; padding: 10px" (click)="changePage()">Or sign in here</span>
     </div>
   </div>
 
